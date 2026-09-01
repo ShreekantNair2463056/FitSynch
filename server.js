@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const planRoutes = require('./routes/planRoutes');
 const membershipRoutes = require('./routes/membershipRoutes');
+const trainerRoutes = require('./routes/trainerRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/plans', planRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api/trainers', trainerRoutes);
 
 // Global Error Handler
 app.use(errorHandler);
