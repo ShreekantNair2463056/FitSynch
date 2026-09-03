@@ -116,4 +116,17 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login };
+// Get all members
+const getMembers = async (req, res, next) => {
+  try {
+    const members = await User.find({ role: 'Member' }).select('-passwordHash');
+    res.status(200).json({
+      success: true,
+      data: members
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, getMembers };

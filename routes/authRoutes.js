@@ -1,6 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
-const { register, login } = require('../controllers/authController');
+const { register, login, getMembers } = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -17,8 +17,13 @@ const loginValidation = [
   body('password').exists().withMessage('Password is required')
 ];
 
+const { verifyToken, authorizeRoles } = require('../middlewares/authMiddleware');
+
 // Routes
 router.post('/register', registerValidation, register);
 router.post('/login', loginValidation, login);
+
+// Protected routes
+router.get('/members', verifyToken, authorizeRoles('Trainer', 'Admin'), getMembers);
 
 module.exports = router;

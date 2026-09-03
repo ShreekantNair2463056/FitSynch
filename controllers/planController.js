@@ -14,9 +14,9 @@ const createPlan = async (req, res, next) => {
       });
     }
 
-    const { name, durationMonths, price } = req.body;
+    const { name, durationMonths, price, features } = req.body;
 
-    const plan = await MembershipPlan.create({ name, durationMonths, price });
+    const plan = await MembershipPlan.create({ name, durationMonths, price, features });
 
     res.status(201).json({
       success: true,

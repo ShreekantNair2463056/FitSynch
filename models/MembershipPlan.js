@@ -16,7 +16,10 @@ const membershipPlanSchema = new mongoose.Schema({
     type: Number,
     required: true,
     min: 0
-  }
+  },
+  features: [{
+    type: String
+  }]
 }, { timestamps: true });
 
 module.exports = mongoose.model('MembershipPlan', membershipPlanSchema);

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const planRoutes = require('./routes/planRoutes');
 const membershipRoutes = require('./routes/membershipRoutes');
@@ -18,10 +19,12 @@ const errorHandler = require('./middlewares/errorHandler');
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api', workoutPlanRoutes);
 app.use('/api/plans', planRoutes);
 app.use('/api/memberships', membershipRoutes);
 app.use('/api/trainers', trainerRoutes);
@@ -29,7 +32,6 @@ app.use('/api/classes', classRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/waitlist', waitlistRoutes);
-app.use('/api', workoutPlanRoutes);
 app.use('/api', notificationRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/admin/reports', reportRoutes);
