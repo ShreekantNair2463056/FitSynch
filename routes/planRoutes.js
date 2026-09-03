@@ -8,7 +8,8 @@ const router = express.Router();
 const planValidation = [
   body('name').notEmpty().withMessage('Name is required').trim(),
   body('durationMonths').isInt({ min: 1 }).withMessage('Duration must be at least 1 month'),
-  body('price').isFloat({ min: 0 }).withMessage('Price must be a positive number')
+  body('price').isFloat({ min: 0 }).withMessage('Price must be a positive number'),
+  body('features').optional().isArray().withMessage('Features must be an array of strings')
 ];
 
 // All routes require authentication
